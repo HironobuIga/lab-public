@@ -1,17 +1,23 @@
 # lab-public
 
-技術記事に添える検証コード置き場。1 ディレクトリが 1 つの検証(≒ 1 本の記事)に対応します。
+Public experiments and verification code. One directory per experiment.
+Some experiments accompany one of my technical articles; others stand on their own.
 
-- コードは記事公開時点の内容をタグ `article/<slug>` で固定しています。
-  記事からのリンクはタグを指すので、その後の変更で記事と食い違うことはありません。
-- 動作確認した環境・実行方法は各ディレクトリの README にあります。
-- 記事のために書いた検証コードです。そのまま本番利用できる品質を保証するものではありません。
+日本語版: [README.ja.md](README.ja.md)
 
-## 一覧
+- When an experiment accompanies an article, the code is frozen at publication time
+  with an `article/<slug>` tag. Articles link to tags, so later changes to the code
+  never diverge from what the article shows.
+- The environment each experiment was verified on, and how to run it,
+  are in each directory's README.
+- This is verification code written for experiments and articles.
+  It is not guaranteed to be production quality.
 
-| ディレクトリ | 概要 | 記事 |
-| ------------ | ---- | ---- |
-| (まだない)   |      |      |
+## Index
+
+| Directory  | Summary | Article |
+| ---------- | ------- | ------- |
+| (none yet) |         |         |
 
 ## License
 

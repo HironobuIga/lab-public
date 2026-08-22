@@ -1,18 +1,21 @@
-# (タイトル)
+# (Title)
 
-何を検証するコードか。1〜2 行。
+What this code verifies, in 1–2 lines.
 
-## 記事
+日本語版: [README.ja.md](README.ja.md)
 
-- (記事 URL)
+## Related article
 
-## 動作環境
+- None — this experiment stands on its own.
+  (If one exists: link the article here, en / ja.)
 
-| もの    | バージョン |
-| ------- | ---------- |
-| Node.js |            |
+## Environment
 
-## 実行方法
+| What    | Version |
+| ------- | ------- |
+| Node.js |         |
+
+## How to run
 
 ```sh
 pnpm install
