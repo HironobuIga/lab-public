@@ -1,0 +1,9 @@
+[project]
+name = "strands-mcp-client-oauth"
+version = "0.1.0"
+description = "Verify Strands Agents v1.53.0 MCPClient OAuth (client_credentials) against a local AS + RS"
+requires-python = ">=3.12"
+dependencies = [
+    # Pulls in mcp (client + server SDK), httpx, PyJWT, starlette, uvicorn.
+    "strands-agents==1.53.0",
+]
