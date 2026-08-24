@@ -1,0 +1,63 @@
+services:
+  # PDP 1: native implementation. AuthZEN endpoints are built in.
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.7.2
+    command: start-dev --features=authzen
+    env_file: .env
+    environment:
+      # Pin the issuer. Without this, a token obtained from the host via
+      # localhost:8080 and then introspected from inside a container via
+      # keycloak:8080 is treated as coming from a different issuer, and
+      # introspection answers active:false even though the token is valid.
+      KC_HOSTNAME: http://localhost:8080
+      KC_HOSTNAME_STRICT: "false"
+    ports:
+      - "8080:8080"
+
+  # PDP 2: reached through an adapter. OPA itself knows nothing about AuthZEN.
+  opa:
+    image: openpolicyagent/opa:1.9.0
+    command: run --server --addr=0.0.0.0:8181 /policy/policy.rego
+    volumes:
+      - ./policy.rego:/policy/policy.rego:ro
+    ports:
+      - "8181:8181"
+
+  # The contrib authzen-proxy, run as-is from the sparse clone in vendor/.
+  authzen-proxy:
+    image: node:22-alpine
+    working_dir: /app
+    command: sh -c "npm install --no-audit --no-fund && node server.js"
+    environment:
+      OPA_URL: http://opa:8181
+      OPA_POLICY_PATH: authzen/allow
+      PORT: "3000"
+    volumes:
+      - ./vendor/contrib/authzen/authzen-proxy:/app
+    # Host side is 3030; port 3000 is often taken by something else.
+    ports:
+      - "3030:3000"
+    depends_on:
+      - opa
+
+  # In front of the same OPA: the version that closes the gaps
+  # (authentication, input validation, discovery, batch).
+  hardened-proxy:
+    image: node:22-alpine
+    working_dir: /app
+    command: node server.mjs
+    env_file: .env
+    environment:
+      OPA_URL: http://opa:8181
+      OPA_POLICY_PATH: authzen/allow
+      PORT: "3000"
+      PUBLIC_URL: http://localhost:3031
+      INTROSPECT_URL: http://keycloak:8080/realms/demo/protocol/openid-connect/token/introspect
+      INTROSPECT_CLIENT_ID: authzen-pdp
+      INTROSPECT_CLIENT_SECRET: ${KC_CLIENT_SECRET}
+    volumes:
+      - ./hardened-proxy:/app:ro
+    ports:
+      - "3031:3000"
+    depends_on:
+      - opa

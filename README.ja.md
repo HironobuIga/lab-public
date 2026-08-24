@@ -14,7 +14,8 @@ English: [README.md](README.md)
 
 | ディレクトリ | 概要 | 記事 |
 | ------------ | ---- | ---- |
-| (まだない)   |      |      |
+| [strands-mcp-client-oauth](strands-mcp-client-oauth/) | Strands Agents 内蔵の `MCPClient(auth=...)` がローカルの AS + RS に対して何を送るか | [ja](https://portfolio-site.iganin.workers.dev/ja/articles/strands-mcp-client-oauth/) / [en](https://portfolio-site.iganin.workers.dev/en/articles/strands-mcp-client-oauth/) |
+| [authzen-pdp-swap](authzen-pdp-swap/) | 同じ AuthZEN の判断要求を Keycloak とアダプタ経由の OPA に投げて比べる | [ja](https://portfolio-site.iganin.workers.dev/ja/articles/authzen-pdp-swap/) / [en](https://portfolio-site.iganin.workers.dev/en/articles/authzen-pdp-swap/) |
 
 ## License
 
