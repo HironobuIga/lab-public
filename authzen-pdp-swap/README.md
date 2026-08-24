@@ -17,7 +17,7 @@ back — decisions, discovery, batch, authentication, and input validation.
 | Keycloak      | 26.7.2 (quay.io, `--features=authzen`)                 |
 | OPA           | 1.9.0                                                  |
 | Node.js       | 22 (alpine image, for both proxies)                    |
-| authzen-proxy | open-policy-agent/contrib (sparse clone into `vendor/`) |
+| authzen-proxy | open-policy-agent/contrib at [`90f7ca9`](https://github.com/open-policy-agent/contrib/tree/90f7ca99ce603c4ce3e40cc990b5a33bb895b557/authzen/authzen-proxy) (sparse clone into `vendor/`) |
 
 ## Layout
 
@@ -41,12 +41,14 @@ back — decisions, discovery, batch, authentication, and input validation.
 
 ## How to run
 
-Copy `.env.example` to `.env` first. The contrib proxy is not vendored here; fetch it:
+Copy `.env.example` to `.env` first. The contrib proxy is not vendored here; fetch it at the commit
+this was verified against, so the results below stay reproducible:
 
 ```sh
-git clone --depth 1 --filter=blob:none --sparse \
+git clone --filter=blob:none --sparse \
   https://github.com/open-policy-agent/contrib.git vendor/contrib
-cd vendor/contrib && git sparse-checkout set authzen/authzen-proxy && cd ../..
+cd vendor/contrib && git sparse-checkout set authzen/authzen-proxy \
+  && git checkout 90f7ca99ce603c4ce3e40cc990b5a33bb895b557 && cd ../..
 ```
 
 ```sh
