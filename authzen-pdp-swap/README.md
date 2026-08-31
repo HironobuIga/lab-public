@@ -6,8 +6,8 @@ back — decisions, discovery, batch, authentication, and input validation.
 
 ## Related article
 
-- ja: https://portfolio-site.iganin.workers.dev/ja/articles/authzen-pdp-swap/
-- en: https://portfolio-site.iganin.workers.dev/en/articles/authzen-pdp-swap/
+- ja: https://iganin.dev/ja/articles/authzen-pdp-swap/
+- en: https://iganin.dev/en/articles/authzen-pdp-swap/
 
 ## Environment
 

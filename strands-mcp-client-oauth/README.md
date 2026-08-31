@@ -5,8 +5,8 @@ discovery chain, scope selection, token reuse, and failure modes — all running
 
 ## Related article
 
-- ja: https://portfolio-site.iganin.workers.dev/ja/articles/strands-mcp-client-oauth/
-- en: https://portfolio-site.iganin.workers.dev/en/articles/strands-mcp-client-oauth/
+- ja: https://iganin.dev/ja/articles/strands-mcp-client-oauth/
+- en: https://iganin.dev/en/articles/strands-mcp-client-oauth/
 
 ## Environment
 

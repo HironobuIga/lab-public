@@ -17,8 +17,8 @@ Some experiments accompany one of my technical articles; others stand on their o
 
 | Directory | Summary | Article |
 | --------- | ------- | ------- |
-| [strands-mcp-client-oauth](strands-mcp-client-oauth/) | What Strands Agents' built-in `MCPClient(auth=...)` does on the wire against a local AS + RS | [ja](https://portfolio-site.iganin.workers.dev/ja/articles/strands-mcp-client-oauth/) / [en](https://portfolio-site.iganin.workers.dev/en/articles/strands-mcp-client-oauth/) |
-| [authzen-pdp-swap](authzen-pdp-swap/) | The same AuthZEN evaluation request against Keycloak and against OPA behind an adapter | [ja](https://portfolio-site.iganin.workers.dev/ja/articles/authzen-pdp-swap/) / [en](https://portfolio-site.iganin.workers.dev/en/articles/authzen-pdp-swap/) |
+| [strands-mcp-client-oauth](strands-mcp-client-oauth/) | What Strands Agents' built-in `MCPClient(auth=...)` does on the wire against a local AS + RS | [ja](https://iganin.dev/ja/articles/strands-mcp-client-oauth/) / [en](https://iganin.dev/en/articles/strands-mcp-client-oauth/) |
+| [authzen-pdp-swap](authzen-pdp-swap/) | The same AuthZEN evaluation request against Keycloak and against OPA behind an adapter | [ja](https://iganin.dev/ja/articles/authzen-pdp-swap/) / [en](https://iganin.dev/en/articles/authzen-pdp-swap/) |
 
 ## License
 
