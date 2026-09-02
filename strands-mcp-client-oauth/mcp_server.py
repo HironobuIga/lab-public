@@ -8,6 +8,8 @@ issuer as the authorization server — that is everything the client discovers.
 
 Run: uv run python mcp_server.py                    (advertises scope "mcp:tools")
      RS_ADVERTISE_SCOPES=0 uv run python mcp_server.py   (advertises no scopes)
+     RS_REQUIRED_SCOPES="mcp:tools mcp:admin" uv run python mcp_server.py
+                                                    (requires and advertises both)
 Listens on http://127.0.0.1:9000/mcp
 """
 
@@ -28,6 +30,8 @@ ISSUER = "http://127.0.0.1:9001"
 RESOURCE = "http://127.0.0.1:9000/mcp"
 JWT_SECRET = "local-demo-secret-not-for-production"  # shared with auth_server.py
 ADVERTISE_SCOPES = os.environ.get("RS_ADVERTISE_SCOPES", "1") != "0"
+# Scopes the RS requires, and therefore advertises as `scopes_supported`.
+REQUIRED_SCOPES = os.environ.get("RS_REQUIRED_SCOPES", "mcp:tools").split() if ADVERTISE_SCOPES else None
 
 
 class JWTVerifier:
@@ -63,7 +67,7 @@ mcp = FastMCP(
     auth=AuthSettings(
         issuer_url=AnyHttpUrl(ISSUER),
         resource_server_url=AnyHttpUrl(RESOURCE),
-        required_scopes=["mcp:tools"] if ADVERTISE_SCOPES else None,
+        required_scopes=REQUIRED_SCOPES,
     ),
 )
 
@@ -83,5 +87,5 @@ def add(a: int, b: int) -> int:
 
 
 if __name__ == "__main__":
-    log.info("advertised scopes: %s", ["mcp:tools"] if ADVERTISE_SCOPES else None)
+    log.info("advertised scopes: %s", REQUIRED_SCOPES)
     mcp.run(transport="streamable-http")

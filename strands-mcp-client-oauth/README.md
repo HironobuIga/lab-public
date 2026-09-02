@@ -23,9 +23,11 @@ discovery chain, scope selection, token reuse, and failure modes — all running
   HS256, one static client, RFC 8414 metadata). Port 9001. Local demo only.
 - `mcp_server.py` — MCP resource server on the official SDK (`FastMCP` + `TokenVerifier`
   + `AuthSettings`), streamable HTTP. Serves RFC 9728 protected resource metadata.
-  Port 9000, path `/mcp`. `RS_ADVERTISE_SCOPES=0` drops `scopes_supported`.
+  Port 9000, path `/mcp`. `RS_ADVERTISE_SCOPES=0` drops `scopes_supported`;
+  `RS_REQUIRED_SCOPES="mcp:tools mcp:admin"` changes the required (and advertised) scopes.
 - `client.py` — Strands `MCPClient` scenarios: `happy`, `reuse`, `wrong-secret`,
-  `client-scopes`.
+  `client-scopes`, `client-subset` (run the RS with `RS_REQUIRED_SCOPES="mcp:tools mcp:admin"`
+  and see whether the client's narrower `scopes=["mcp:tools"]` reaches the token request).
 
 ## How to run
 

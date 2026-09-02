@@ -4,7 +4,7 @@ Each scenario prints the httpx request log, so the discovery sequence
 (401 -> protected resource metadata -> AS metadata -> token -> retry) is visible
 from the client side; auth_server.py and mcp_server.py log the server side.
 
-Run: uv run python client.py <happy|reuse|wrong-secret|client-scopes>
+Run: uv run python client.py <happy|reuse|wrong-secret|client-scopes|client-subset>
 """
 
 import logging
@@ -67,11 +67,24 @@ def scenario_client_scopes() -> None:
     print("check the AS log: which scope did the token request actually carry?")
 
 
+def scenario_client_subset() -> None:
+    """Ask for a subset of what the RS advertises. Does the narrower choice reach the token request?
+
+    Run the RS with RS_REQUIRED_SCOPES="mcp:tools mcp:admin" so it advertises both.
+    """
+    client = MCPClient(url=MCP_URL, auth=credentials(scopes=["mcp:tools"]))
+    with client:
+        result = client.call_tool_sync(tool_use_id="whoami-subset", name="whoami")
+        print("whoami:", result["content"][0]["text"])
+    print("check the AS log: which scope did the token request actually carry?")
+
+
 SCENARIOS = {
     "happy": scenario_happy,
     "reuse": scenario_reuse,
     "wrong-secret": scenario_wrong_secret,
     "client-scopes": scenario_client_scopes,
+    "client-subset": scenario_client_subset,
 }
 
 if __name__ == "__main__":
